@@ -1,11 +1,63 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-  </head>
-  <body>
-    <h1>Hello</h1>
+{% extends "base.html" %}
+{% block content %}
 
-  </body>
-</html>
+<div class="jumbotron">
+<h1 class="display-4">Welcome to Crypto Currency Network</h1>
+<p class="lead">Your source to get informed about the world of Blockchains and Crypto Currency</p>
+<hr class="my-4">
+
+</div>
+
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">24hr High</th>
+      <th scope="col">24hr Low</th>
+      <th scope="col">Market Cap</th>
+    </tr>
+  </thead>
+
+{% for key,value in price.DISPLAY.items %}
+
+
+
+  <tbody>
+    <tr>
+      <td>{{ key }}</td>
+      <td>{{ value.USD.PRICE }}</td>
+      <td>{{ value.USD.HIGHDAY }}</td>
+      <td>{{ value.USD.LOWDAY }}</td>
+      <td>{{ value.USD.MKTCAP }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+<br>
+
+<!-- {{ price }} -->
+
+
+  <div class="container">
+    <div class="row">
+      {% for x in api.Data %}
+        <div class="col-sm">
+          <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="{{x.imageurl}}" alt="{{x.source}}">
+              <div class="card-body">
+                <h5 class="card-title">{{x.title}}</h5>
+                <p class="card-text">{{x.body}}</p>
+                <a href="{{ x.url }}" class="btn btn-primary">Read More...</a>
+              </div>
+          </div>
+          <br>
+        </div>
+      {%endfor%}
+    </div>
+  </div>
+
+{% endblock %}
